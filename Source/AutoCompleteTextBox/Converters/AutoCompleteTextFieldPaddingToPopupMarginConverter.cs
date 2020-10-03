@@ -5,7 +5,7 @@ using System.Windows.Data;
 
 namespace AutoCompleteTextBox.Converters
 {
-    public class AutoCompleteTextFieldPaddingToPopupMarginConverter : IValueConverter
+    internal class AutoCompleteTextFieldPaddingToPopupMarginConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
