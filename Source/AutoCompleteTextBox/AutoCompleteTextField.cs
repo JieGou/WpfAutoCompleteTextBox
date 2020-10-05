@@ -101,6 +101,7 @@ namespace AutoCompleteTextBox
         private void UnregisterEventHandlers()
         {
             PreviewKeyDown -= OnPreviewKeyDown;
+            KeyDown -= OnKeyDown;
             _textBox.GotMouseCapture -= OnTextBoxGotMouseCapture;
             _textBox.TextChanged -= OnTextBoxTextChanged;
             _textBox.PreviewKeyDown -= OnTextBoxPreviewKeyDown;
