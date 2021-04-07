@@ -15,31 +15,32 @@
 
     <system:Double x:Key="IconSize">16</system:Double>
 
-    <DropShadowEffect 
+    <DropShadowEffect
         x:Key="AutoCompleteTextFieldPopupBorderShadow"
-        BlurRadius="8" 
-        ShadowDepth="2.25" 
-        Opacity=".42" 
-        RenderingBias="Performance" 
-        po:Freeze="True"/>
+        BlurRadius="8"
+        ShadowDepth="2.25"
+        Opacity=".42"
+        RenderingBias="Performance"
+        po:Freeze="True" />
 
     <DataTemplate x:Key="AutoCompleteTextFieldRemoveButtonContentTemplate">
         <Viewbox>
             <Canvas Width="2048" Height="2048">
-                <Path 
+                <Path
                     Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}"
-                    Data="M1718.1,1534.2c18.9,18.9,18.9,49.6,0,68.5l-115.4,115.4c-18.9,18.9-49.6,18.9-68.5,0L1024,1207.8l-510.2,510.2c-18.9,18.9-49.6,18.9-68.5,0l-115.4-115.4c-18.9-18.9-18.9-49.6,0-68.5L840.2,1024L329.9,513.8c-18.9-18.9-18.9-49.6,0-68.5l115.4-115.4c18.9-18.9,49.6-18.9,68.5,0L1024,840.2l510.2-510.2c18.9-18.9,49.6-18.9,68.5,0l115.4,115.4c18.9,18.9,18.9,49.6,0,68.5L1207.8,1024L1718.1,1534.2z"/>
+                    Data="M1718.1,1534.2c18.9,18.9,18.9,49.6,0,68.5l-115.4,115.4c-18.9,18.9-49.6,18.9-68.5,0L1024,1207.8l-510.2,510.2c-18.9,18.9-49.6,18.9-68.5,0l-115.4-115.4c-18.9-18.9-18.9-49.6,0-68.5L840.2,1024L329.9,513.8c-18.9-18.9-18.9-49.6,0-68.5l115.4-115.4c18.9-18.9,49.6-18.9,68.5,0L1024,840.2l510.2-510.2c18.9-18.9,49.6-18.9,68.5,0l115.4,115.4c18.9,18.9,18.9,49.6,0,68.5L1207.8,1024L1718.1,1534.2z" />
             </Canvas>
         </Viewbox>
     </DataTemplate>
-
+    <!--匹配项的删除按钮样式-->
     <Style x:Key="AutoCompleteTextFieldRemoveButtonStyle" TargetType="{x:Type Button}">
-        <Setter Property="UseLayoutRounding" Value="True"/>
-        <Setter Property="OverridesDefaultStyle" Value="True"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="UseLayoutRounding" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="ToolTip" Value="清除" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Focusable" Value="False" />
         <Setter Property="Padding" Value="8,0" />
@@ -53,7 +54,7 @@
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}">
-                        <ContentPresenter 
+                        <ContentPresenter
                             x:Name="ContentPresenter"
                             Content="{TemplateBinding Content}"
                             ContentTemplate="{TemplateBinding ContentTemplate}"
@@ -63,14 +64,14 @@
                             RenderOptions.ClearTypeHint="Auto"
                             TextOptions.TextRenderingMode="Auto"
                             TextOptions.TextFormattingMode="Display"
-                            Opacity="0.64"/>
+                            Opacity="0.64" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Opacity" TargetName="ContainerBorder" Value="0.42"/>
+                            <Setter Property="Opacity" TargetName="ContainerBorder" Value="0.42" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Opacity" TargetName="ContentPresenter" Value="1"/>
+                            <Setter Property="Opacity" TargetName="ContentPresenter" Value="1" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -92,9 +93,9 @@
                         BorderThickness="{TemplateBinding BorderThickness}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         Background="{TemplateBinding Background}">
-                        <ScrollViewer 
+                        <ScrollViewer
                             x:Name="PART_ContentHost"
-                            Margin="{TemplateBinding Padding}"/>
+                            Margin="{TemplateBinding Padding}" />
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -108,6 +109,7 @@
         <Setter Property="Placement" Value="Relative" />
     </Style>
 
+    <!--匹配下拉列表样式-->
     <Style x:Key="AutoCompleteTextFieldListBoxItemStyle" TargetType="{x:Type ListBoxItem}">
         <Setter Property="UseLayoutRounding" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
@@ -117,6 +119,7 @@
         <Setter Property="Height" Value="Auto" />
         <Setter Property="MinHeight" Value="38" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <!--列表项模板样式-->
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ListBoxItem}">
@@ -125,40 +128,42 @@
                         BorderBrush="{TemplateBinding BorderBrush}"
                         Background="{TemplateBinding Background}">
 
+                        <!--点击绑定SelectItemCommand(选择项命令)-->
                         <Border.InputBindings>
-                            <MouseBinding 
-                                Gesture="LeftClick" 
+                            <MouseBinding
+                                Gesture="LeftClick"
                                 CommandParameter="{Binding}"
                                 Command="{x:Static local:AutoCompleteTextField.SelectItemCommand}" />
                         </Border.InputBindings>
 
                         <Grid VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <Viewbox 
+                            <!--图形-->
+                            <Viewbox
                                 Grid.Column="0"
                                 Margin="12,0"
                                 Opacity="0.64"
                                 Width="{StaticResource IconSize}"
                                 Height="{StaticResource IconSize}">
                                 <Canvas Width="24" Height="24">
-                                    <Path 
+                                    <Path
                                         Fill="{TemplateBinding Foreground}"
                                         Data="M12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22C6.47,22 2,17.5 2,12A10,10 0 0,1 12,2M12.5,7V12.25L17,14.92L16.25,16.15L11,13V7H12.5Z" />
                                 </Canvas>
                             </Viewbox>
-
-                            <TextBlock 
+                            <!--文本-->
+                            <TextBlock
                                 Grid.Column="1"
                                 Margin="{TemplateBinding Padding}"
                                 Text="{Binding Item}"
                                 ToolTip="{Binding Item}"
                                 VerticalAlignment="Center"
-                                TextTrimming="WordEllipsis"/>
-
+                                TextTrimming="WordEllipsis" />
+                            <!--删除按钮-->
                             <Button
                                 x:Name="RemoveButton"
                                 Grid.Column="2"
@@ -170,10 +175,10 @@
                                 Style="{StaticResource AutoCompleteTextFieldRemoveButtonStyle}">
                                 <Button.ContentTemplate>
                                     <DataTemplate>
-                                        <ContentControl 
+                                        <ContentControl
                                             ContentTemplate="{StaticResource AutoCompleteTextFieldRemoveButtonContentTemplate}"
                                             Width="{StaticResource IconSize}"
-                                            Height="{StaticResource IconSize}"/>
+                                            Height="{StaticResource IconSize}" />
                                     </DataTemplate>
                                 </Button.ContentTemplate>
                             </Button>
@@ -181,13 +186,13 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter 
+                            <Setter
                                 Property="Background"
                                 Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:AutoCompleteTextField}}, Path=ListBoxSelectedItemBackground}" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter 
-                                Property="Background" 
+                            <Setter
+                                Property="Background"
                                 Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:AutoCompleteTextField}}, Path=ListBoxItemMouseOverBackground}" />
                             <Setter TargetName="RemoveButton" Property="Visibility" Value="Visible" />
                         </Trigger>
@@ -207,9 +212,9 @@
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Style.Resources>
             <Style TargetType="Border">
-                <Setter 
-                    Property="CornerRadius" 
-                    Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:AutoCompleteTextField}}, Path=CornerRadius}"/>
+                <Setter
+                    Property="CornerRadius"
+                    Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:AutoCompleteTextField}}, Path=CornerRadius}" />
             </Style>
         </Style.Resources>
     </Style>
@@ -232,39 +237,39 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:AutoCompleteTextField}">
-                    <Border 
+                    <Border
                         x:Name="PART_ContainerBorder"
                         CornerRadius="{TemplateBinding CornerRadius}"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}">
-                        <Grid 
+                        <Grid
                             Margin="{TemplateBinding Padding}"
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                             <ContentPresenter
                                 x:Name="PART_HintPresenter"
                                 Cursor="IBeam"
                                 Opacity="0.64"
-                                TextBlock.TextAlignment="{Binding ElementName=PART_TextBox, Path=TextAlignment}"                                
+                                TextBlock.TextAlignment="{Binding ElementName=PART_TextBox, Path=TextAlignment}"
                                 Visibility="{Binding ElementName=PART_TextBox, Path=Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}"
                                 Content="{TemplateBinding Hint}" />
-                            <TextBox 
-                                x:Name="PART_TextBox" 
-                                Foreground="{TemplateBinding Foreground}"                                
+                            <TextBox
+                                x:Name="PART_TextBox"
+                                Foreground="{TemplateBinding Foreground}"
                                 Style="{StaticResource AutoCompleteTextFieldTextBoxStyle}"
                                 Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                            <Popup 
+                            <Popup
                                 x:Name="PART_SuggestionPopup"
                                 PlacementTarget="{Binding ElementName=PART_ContainerBorder}"
                                 Style="{StaticResource AutoCompleteTextFieldPopupStyle}">
-                                <Border 
+                                <Border
                                     Margin="8"
                                     Effect="{StaticResource AutoCompleteTextFieldPopupBorderShadow}"
                                     CornerRadius="{TemplateBinding CornerRadius}"
                                     Background="{TemplateBinding Background}"
                                     BorderBrush="{TemplateBinding BorderBrush}"
                                     BorderThickness="{TemplateBinding BorderThickness}">
-                                    <StackPanel 
+                                    <StackPanel
                                         Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:AutoCompleteTextField}}, Path=ActualWidth}">
                                         <Grid Margin="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Padding, Converter={StaticResource AutoCompleteTextFieldPaddingToPopupMarginConverter}}">
                                             <ContentPresenter
@@ -272,28 +277,28 @@
                                                 Opacity="0.64"
                                                 VerticalAlignment="Center"
                                                 Margin="{Binding ElementName=PART_HintPresenter, Path=Margin}"
-                                                TextBlock.TextAlignment="{Binding ElementName=PART_TextBox, Path=TextAlignment}"                                
+                                                TextBlock.TextAlignment="{Binding ElementName=PART_TextBox, Path=TextAlignment}"
                                                 Visibility="{Binding ElementName=PART_TextBox, Path=Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}"
                                                 Content="{TemplateBinding Hint}" />
 
-                                            <TextBox 
-                                                x:Name="PART_PopupTextBox" 
+                                            <TextBox
+                                                x:Name="PART_PopupTextBox"
                                                 Margin="{Binding ElementName=PART_TextBox, Path=Margin}"
                                                 Foreground="{TemplateBinding Foreground}"
                                                 Height="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:AutoCompleteTextField}}, Path=ActualHeight}"
                                                 Style="{StaticResource AutoCompleteTextFieldTextBoxStyle}"
                                                 Text="{Binding ElementName=PART_TextBox, Path=Text, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
                                         </Grid>
-                                        <Separator 
+                                        <Separator
                                             BorderBrush="{TemplateBinding Foreground}"
                                             BorderThickness="2"
                                             Opacity="0.2"
-                                            Margin="12,0"/>
+                                            Margin="12,0" />
                                         <ListBox
                                             x:Name="PART_SuggestionListBox"
                                             Foreground="{TemplateBinding Foreground}"
                                             Background="{TemplateBinding Background}"
-                                            MaxHeight="{TemplateBinding SuggestionListMaxHeight}"                                            
+                                            MaxHeight="{TemplateBinding SuggestionListMaxHeight}"
                                             ItemContainerStyle="{StaticResource AutoCompleteTextFieldListBoxItemStyle}"
                                             Style="{StaticResource AutoCompleteTextFieldListBoxStyle}" />
                                     </StackPanel>
@@ -305,5 +310,4 @@
             </Setter.Value>
         </Setter>
     </Style>
-
 </ResourceDictionary>
