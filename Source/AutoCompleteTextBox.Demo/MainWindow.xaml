@@ -1,4 +1,4 @@
-﻿<Window 
+﻿<Window
     x:Class="AutoCompleteTextBox.Demo.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:AutoCompleteTextBox;assembly=AutoCompleteTextBox"
     mc:Ignorable="d"
-    Title="SourceSara.Com" 
+    Title="SourceSara.Com"
     Height="500"
     Width="600"
     MinWidth="600"
@@ -34,49 +34,27 @@
         </Style>
     </Window.Resources>
     <StackPanel Margin="0,32,0,0">
-        <TextBlock 
-            FontSize="24"
-            Margin="0,24"
-            TextAlignment="Center"
-            Foreground="#8ab4f8"
-            Text="WPF Auto Complete Text Field"/>
-
-        <Grid 
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            TextBlock.FontSize="16"
-            TextBlock.Foreground="#a0afc0">
+        <TextBlock FontSize="24" Margin="0,24" TextAlignment="Center" Foreground="#8ab4f8"
+                   Text="WPF Auto Complete Text Field" />
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center"
+              TextBlock.FontSize="16" TextBlock.Foreground="#a0afc0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-
             <StackPanel Grid.Row="0" Margin="16">
-                <TextBlock 
-                    Text="Left to right"
-                    Margin="16,0"/>
-                <local:AutoCompleteTextField 
-                    Hint="Search..."
-                    RemoveItemCommand="{Binding LtrDeleteCommand}"
-                    ItemsSource="{Binding LtrItems}"/>
+                <TextBlock Text="Left to right" Margin="16,0" />
+                <local:AutoCompleteTextField Hint="Search..."
+                                             RemoveItemCommand="{Binding LtrDeleteCommand}"
+                                             ItemsSource="{Binding LtrItems}" />
             </StackPanel>
-
             <StackPanel Grid.Row="1"  Margin="16">
-                <TextBlock 
-                    Text="Right to left"
-                    Margin="16,0"/>
-                <local:AutoCompleteTextField 
-                    FlowDirection="RightToLeft"
-                    Hint="جستجو..."
-                    RemoveItemCommand="{Binding RtlDeleteCommand}"
-                    ItemsSource="{Binding RtlItems}"/>
+                <TextBlock Text="Right to left" Margin="16,0" />
+                <local:AutoCompleteTextField FlowDirection="RightToLeft" Hint="جستجو..."
+                                             RemoveItemCommand="{Binding RtlDeleteCommand}"
+                                             ItemsSource="{Binding RtlItems}" />
             </StackPanel>
         </Grid>
-
-        <local:MadeByAmRo
-            Margin="0,64,0,0"
-            Foreground="#a0afc0"
-            AmRoLogoBrush="#8ab4f8"
-            HeartBrush="#f28b82"/>
+        <local:MadeByAmRo Margin="0,64,0,0" Foreground="#a0afc0" AmRoLogoBrush="#8ab4f8" HeartBrush="#f28b82" />
     </StackPanel>
 </Window>

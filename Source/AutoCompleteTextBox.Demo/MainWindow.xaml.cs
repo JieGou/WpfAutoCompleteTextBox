@@ -1,18 +1,19 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 
 namespace AutoCompleteTextBox.Demo
 {
-    public partial class MainWindow : INotifyPropertyChanged
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
         #region Fields
 
         private ObservableCollection<string> _ltrItems;
         private ObservableCollection<string> _rtlItems;
 
-        #endregion
+        #endregion Fields
 
         #region Constructors
 
@@ -25,13 +26,13 @@ namespace AutoCompleteTextBox.Demo
             DataContext = this;
         }
 
-        #endregion
+        #endregion Constructors
 
         #region INotifyPropertyChanged
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        #endregion
+        #endregion INotifyPropertyChanged
 
         #region Properties
 
@@ -55,23 +56,29 @@ namespace AutoCompleteTextBox.Demo
             }
         }
 
-
-        #endregion
+        #endregion Properties
 
         #region Commands
 
         public ICommand LtrDeleteCommand { get; set; }
         public ICommand RtlDeleteCommand { get; set; }
 
-        #endregion
+        #endregion Commands
 
         #region Command handlers
 
+        /// <summary>
+        /// 删除选项项命令
+        /// </summary>
+        /// <param name="parameter"></param>
         private void HandleLtrDeleteCommand(object parameter)
         {
+            //点击删除的项
             var item = parameter.ToString();
+            //更新列表集合
             var filteredItems = LtrItems.Where(i => i.ToLower() != item.ToLower());
 
+            //更新数据源
             LtrItems = new ObservableCollection<string>(filteredItems);
         }
 
@@ -83,7 +90,7 @@ namespace AutoCompleteTextBox.Demo
             RtlItems = new ObservableCollection<string>(filteredItems);
         }
 
-        #endregion
+        #endregion Command handlers
 
         #region Helper methods
 
@@ -131,6 +138,6 @@ namespace AutoCompleteTextBox.Demo
             RtlDeleteCommand = new RelayCommand(HandleRtlDeleteCommand);
         }
 
-        #endregion
+        #endregion Helper methods
     }
 }
