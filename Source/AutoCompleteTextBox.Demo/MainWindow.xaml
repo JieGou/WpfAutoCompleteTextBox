@@ -44,7 +44,7 @@
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" Margin="16">
                 <TextBlock Text="Left to right" Margin="16,0" />
-                <local:AutoCompleteTextField Hint="Search..."
+                <local:AutoCompleteTextField Hint="Search..." LostFocus="AutoCompleteTextField_LostFocus" x:Name="autoCompleteText"
                                              RemoveItemCommand="{Binding LtrDeleteCommand}"
                                              ItemsSource="{Binding LtrItems}" />
             </StackPanel>

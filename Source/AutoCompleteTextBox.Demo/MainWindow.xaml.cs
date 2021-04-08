@@ -139,5 +139,14 @@ namespace AutoCompleteTextBox.Demo
         }
 
         #endregion Helper methods
+
+        private void AutoCompleteTextField_LostFocus(object sender, RoutedEventArgs e)
+        {
+            string text = this.autoCompleteText.Text;
+            if (LtrItems.All(i => i.ToLower() != text.ToLower()))
+            {
+                LtrItems.Add(text);
+            }
+        }
     }
 }
